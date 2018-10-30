@@ -93,4 +93,9 @@ void createLinkListR(LNode *&head)#
 ```
 
 2018-10-29
-lfsjyzt
+Null
+2018-10-30
+09.00-10.00 data struct
+10.00-11.00 data struct
+11.00-11.30 dahua
+11.30-12.00 search word
