@@ -42,9 +42,9 @@ L.data = (ElemType *)malloc(InitSize*sizeof(ElemType));
 插入操作：在顺序表第i个位置插入新元素e
 ```c
 bool ListInsert(SqList &L,int i ,ElemType e){
-	if (i < 1 || i > L.length+1) //1.如果插入位置不合理，抛出异常
+	if (i < 1 || i > L.length+1)       //1.如果插入位置不合理，抛出异常
 		return false;
-	if (L.length >= MaxSize) //2.如果线性表长度大于等于数组长度，则抛出异常或动态增加容量
+	if (L.length >= MaxSize)           //2.如果线性表长度大于等于数组长度，则抛出异常或动态增加容量
 		return false;
 	for (int j = L.length;j >= i; j--) //3.从最后一个元素开始向前遍历到第 i 个位置，分别将它们都向后移动一个位置
 		L.data[j]=L.data[j-1]
@@ -85,8 +85,8 @@ int LocateElem(SqList L,int i ,ElemType e){
 	- 随机存取，所以能在O(1)的时间复杂度内访问任意元素
 	- 存储密度高，每个结点只存数据元素
 	- 逻辑上相邻的元素物理上也相邻，所以插入和删除需要移动大量元素
-
 ---
+
 
 ### 链式存储-链表
 散落在内存中的空间被指针连接了起来
