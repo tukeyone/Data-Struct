@@ -152,6 +152,8 @@ Head-> prior == head
 不含有头结点的单双循环链表：Head指针指向开始节点（第一个节点存数据）
 Head == NULL 为真
 
+
+
 ```c 
 void createLinkListR(LNode *&head)#
 {
