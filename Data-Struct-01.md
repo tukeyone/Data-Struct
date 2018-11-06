@@ -182,7 +182,90 @@ void createLinkListR(LNode *&head)#
 - `Pop(&S,x)`：出栈
 - `GetTop(S,&x)`：读取栈顶元素
 - `ClearStack(&S)`:销毁栈
-### 栈的基本概念
+
+
+### 栈的顺序存储结构
+1. 顺序栈的实现
+
+利用一组地址连续的存储单元存放自栈底到栈顶的数据元素，同时附设一个指针（Top）指示当前栈顶的位置。
+
+```c
+define MaxSize 50 
+typedef struct{
+	Elemtype data[MaxSize];
+	int top;
+}SqStack;
+```
+- 栈顶指针：`S.top`,初始时候`S.top=-1`
+- 栈顶元素：`S.data[S.top]`
+- 出栈操作：栈非空时，先取栈顶元素值，再将栈顶指针减1
+- 栈空条件：`S.top == -1`
+- 栈满条件：`S.top == MaxSize-1`
+- 栈长：`S.top+1`
+
+2. 顺序栈的基本运算
+(1)初始化
+```
+void InitStack(&S){
+	s.top=-1}//初始化栈顶指针
+```
+(2)判栈空
+```
+bool StackEmpty(S){
+	if(s.top == -1)       //栈空
+		return true ;
+	else                  //不空
+		return false;
+	}
+```
+(3)进栈
+```c
+bool Push(SqStack &S,ElemType x){
+	if(S.top == MaxSize-1) //若栈满，报错
+		return false ;
+	S.data[++S.top] = x;   //指针先加1，再入栈
+	return true;
+}
+````
+(4)出栈
+```c
+bool Pop(SqStack &S,ElemType x){
+	if(S.top == -1)		//栈空报错
+		return false;
+	x = S.data[S.tope--];   //先出栈，指针再减1
+	return ture ;
+}
+```
+(5)读栈顶元素
+```
+bool GetTop(SqStack S,Elemtype &x){
+	if (S.top == -1)	//栈空报错
+		return false;
+	x = S.data[S.top];      //栈顶元素赋值给x
+	return true;
+
+}
+```
+
+注：这里栈顶指针初始化 `S.top=-1` ，即栈顶指针指向的就是栈顶元素，故进栈时候的操作是`S.data[++S.top]=x`;出栈操作是`x = S.data[S.top--]`
+
+如果栈顶指针初始化`S.top = 0`，即栈顶指针指向的栈顶元素的下一个元素，则入栈操作变为`S.data[S.top++]=x`；出栈操作是`x = S.data[--S.top]`
+
+3. 共享栈
+利用栈底位置相对不变的特性，可以让两个顺序栈共享一个一维数据空间，将两个栈的栈底分别设置在共享空间的两端，两个栈顶向共享空间的中间延伸。
+
+栈的链式存储
+
+链栈没有头结点，Lhead指向栈顶元素
+
+```
+typedef struct Linknode{
+	ElemType data;			//数据域
+	Struct Linknode *next;		//指针域
+} *LiStack;				//栈类型定义
+```
+
+
 
 2018-10-31
 09.00-10.00 data struct
