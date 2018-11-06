@@ -170,18 +170,18 @@ void createLinkListR(LNode *&head)#
 ## 栈
 ### 栈的基本概念
 1. 栈的定义
-栈（Stack）：只能在一段插入或删除的线性表
-栈顶（Top）：允许插入或删除的那一端
-栈底（Button）：固定不允许插入或删除的那一端
-空栈：不含任何元素的空表
+- 栈（Stack）：只能在一段插入或删除的线性表
+- 栈顶（Top）：允许插入或删除的那一端
+- 栈底（Button）：固定不允许插入或删除的那一端
+- 空栈：不含任何元素的空表
 
 2. 基本操作
-`InitStack(&S)`：初始化
-`StackEmpty(S)`:判空
-`Push(&S,x)`：近栈
-`Pop(&S,x)`：出栈
-`GetTop(S,&x)`：读取栈顶元素
-`ClearStack(&S)`:销毁栈
+- `InitStack(&S)`：初始化
+- `StackEmpty(S)`:判空
+- `Push(&S,x)`：近栈
+- `Pop(&S,x)`：出栈
+- `GetTop(S,&x)`：读取栈顶元素
+- `ClearStack(&S)`:销毁栈
 ### 栈的基本概念
 
 2018-10-31
