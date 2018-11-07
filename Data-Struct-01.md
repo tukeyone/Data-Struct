@@ -239,7 +239,7 @@ bool Pop(SqStack &S,ElemType x){
 }
 ```
 (5)读栈顶元素
-```
+```c
 bool GetTop(SqStack S,Elemtype &x){
 	if (S.top == -1)	//栈空报错
 		return false;
@@ -260,12 +260,88 @@ bool GetTop(SqStack S,Elemtype &x){
 
 链栈没有头结点，Lhead指向栈顶元素
 
-```
+```c
 typedef struct Linknode{
 	ElemType data;			//数据域
 	Struct Linknode *next;		//指针域
 } *LiStack;				//栈类型定义
 ```
+
+## 队列
+### 基本概念
+1. 队列的定义
+队列（Queue）：是一种操作受限的线性表，只允许在表的一端进行插入，而在表的另一端进行删除。
+插入称为入队或者进队；
+删除称为出队或者离队；
+
+FIFO先进先出
+队头（Front）：允许删除的一端
+队尾（Rear）：允许插入的一端
+空队列：不含任何元素
+
+2. 队列常见的基本操作
+- InitQueue(&Q):初始化队列，构造一个空队列
+- QueueEmpty(Q):判队列空，为空返回true，否则返回false
+- EnQueue(&Q,x):入队，若队列Q未满，将x加入到新的队尾
+- DeQueue(&Q,&x):出队，若队列Q非空，删除队头元素，并用x返回
+- GetHead(Q,&x):读取队头元素，若队列Q非空，则将队头元素赋值给x
+
+注：不可以随便读取队列中间的某个数据
+
+### 队列的顺序结构存储
+1. 队列的顺序存储
+队列的顺序存储是指分配一块连续的存储单元存放队列的元素，并附设两个指针front和rear分别指示队头和队尾元素的位置。
+
+设队头指针指向队头元素，队尾指针指向队尾元素的下一个位置
+
+队列的顺序存储类型可以描述为
+```c
+#define MaxSize 50
+typedef struct(
+ElemType data[MaxSize];
+int front ,rear;
+}
+```
+初始状态（队空条件）Q.Front == Q.rear == 0
+进队操作：队不满时，先送值到队尾元素，再将队尾指针加1 
+出队操作：队不空时，先取队头元素值，再将队头指针加1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
