@@ -292,7 +292,7 @@ FIFO先进先出
 1. 队列的顺序存储
 队列的顺序存储是指分配一块连续的存储单元存放队列的元素，并附设两个指针front和rear分别指示队头和队尾元素的位置。
 
-设队头指针指向队头元素，队尾指针指向队尾元素的下一个位置
+设队头指针front指向队头元素，队尾指针rear指向队尾元素的下一个位置
 
 队列的顺序存储类型可以描述为
 ```c
@@ -302,9 +302,128 @@ ElemType data[MaxSize];
 int front ,rear;
 }
 ```
-初始状态（队空条件）Q.Front == Q.rear == 0
+初始状态（判断队空条件）Q.front == Q.rear == 0
 进队操作：队不满时，先送值到队尾元素，再将队尾指针加1 
 出队操作：队不空时，先取队头元素值，再将队头指针加1
+
+注：队尾Q.rear== MaxSize不能作为队列满的条件。
+队列中只有一个元素时候，仍然满足该条件。
+但是入队会出现“上溢出”，但这种溢出并不是真正的溢出，在数组中仍然存在可以存放元素的位置，所以是一种假溢出
+
+2. 循环队列
+
+将顺序队列臆造为一个环装的空间，即把存储队列元素的表从逻辑上看做是一个环，称为循环队列。
+
+当队首指针Q.front = MaxSize -1 后，再前进一个位置就自动到0，这时候可以利用取余运算（%）来实现。
+
+初始时：Q.front = Q.rear = 0
+队首指针进1 ：Q.front = (Q.front+1)%MaxSize
+队尾指针进1：Q.rear = (Q.rear+1)%MaxSize
+队列长度：(Q.rear+MaxSize-Q.front)%MaxSize
+出队入队时：指针都按顺时针方向进1
+
+注：显然队空的条件是Q.front == Q.rear
+
+如果入队元素的速度快于出队元素的速度，队尾指针很快就赶上了队首指针。此时可以看出队满也有Q.front == Q.rear
+为了区分队空还是队满，有三种处理方式：
+1）牺牲一个单元来区分队空和队满，入队时少用一个队列单元。约定“队头指针在队尾指针的下一位置作为队满的标志”
+
+队满条件：(Q.rear+1)%MaxSize == Q.front
+队空条件仍为：Q.front == Q.rear
+队列中元素的个数：(Q.rear - Q.front + MaxSize)%MaxSize
+
+2)类型中增设表示元素表示个数的数据成员。
+这样，队空的条件为Q.Size==0
+队满的条件为Q.size==MaxSize
+这两种情况都有Q.front = Q.rear
+
+3)类型中增设tag成员，以区分是队满还是队空。
+if tag= 0 因删除导致 Q.front == Q.rear 则为队空
+if tag= 1 因插入导致 Q.front == Q.rear 则为队满
+
+3. 循环队列的操作
+初始化
+```c
+void InitQueue(&Q){
+		Q.rear = Q.front = 0;//初始化队首，队尾指针
+}
+```
+判空
+```c
+bool isEmpty(Q){
+if (Q.rear == Q.front)//队空条件
+	return ture
+else 
+	return false;
+}
+```
+
+入队
+```c
+bool EnQueue(SqQueue &Q,ElemType x){
+	if ((Q.rear +1)%MaxSize==Q.front)//队满
+		return false
+	Q.data[Q.rear+1]%MaxSize;// 队尾指针+1取模
+	return true
+}
+```
+出队
+```c
+bool DeQueue(SqQueue &Q, ElemType &x){
+	if (Q.rear == Q.front) //队空
+		return false;
+	x = Q.data[Q.front];
+	Q.front = (Q.front+1)%MaxSize;//队头指针+1取模
+	return true
+
+}
+
+```
+
+### 队列的链式存储
+
+1. 队列的链式存储
+一个同时带有队头指针和队尾指针的单链表。头指针指向队头结点，尾指针指向队尾结点，即单链表的最后一个结点（与顺序存储不同）
+
+队列的链式存储类型可描述为
+```
+typedef struct{
+	ElemType data;
+	struct LinkNode * next;
+}LinkNode;
+```
+Q.front == NULL 且 Q.rear = NULL时，链式队列为空
+
+出队时，首先判断是否为空，若不空，则取出队头元素，将其从链表中摘除，并让Q.front指向下一个结点（若该结点为最后一个结点，则置Q.front和Q.rear都是NULL）入队时，建立一个新结点，将新结点插入到链表的尾部，并该让Q.rear指向这个新插入的结点（若原队列为空队列，则令Q.front也指向该结点）
+
+将链式队列设计成一个带头结点的单链表，这样插入和删除操作就统一了。
+
+用单链表表示的链式队列特别适合与数据元素变动比较大的情形，而且不存在队列满且产生溢出的问题。多个队列最好使用多个队列
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
