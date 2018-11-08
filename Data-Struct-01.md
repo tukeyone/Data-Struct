@@ -402,6 +402,61 @@ Q.front == NULL 且 Q.rear = NULL时，链式队列为空
 
 用单链表表示的链式队列特别适合与数据元素变动比较大的情形，而且不存在队列满且产生溢出的问题。多个队列最好使用多个队列
 
+2. 链式队列基本操作
+初始化
+```c
+void InitQueue(LinkQueue &Q){
+		Q.front = Q.rear = (LinkNode*)malloc(sizeof(LinkNode));// 建立头结点
+		Q.front -> next = NULL; // 初始为空
+}
+```
+判空
+```c
+bool IsEmpty(LinkQueue &Q){
+	if (Q.front == Q.rear)//队空条件
+		return ture
+	else 
+		return false;
+}
+```
+
+入队
+```c
+void EnQueue(LinkQueue &Q,ElemType x){
+	s = (LinkNode *)malloc(sizeof(LinkNode));
+	s -> data = x;
+	s -> next = NULL;
+	Q.rear -> next = s;
+	Q.rear = s;
+}
+```
+出队
+```c
+bool DeQueue(LinkQueue &Q, ElemType &x){
+	if (Q.front == Q.rear) //队空
+		return false;
+	p = Q.front -> next ;
+	if (Q.rear == p)
+		Q.rear ==Q.front;//若原队列中只有一个结点，删除后变空
+	free (p);
+	return true
+
+}
+
+```
+### 双端队列
+
+双端队列是运行路段都可以进行出队和入队操作的队列。其元素的逻辑结构仍然是线性结构。
+
+前端进的排在后端进的前面。
+
+出队时，不管前端后端出队，先出的一定排列在后出的元素的前面
+
+输出受限的双端队列：允许一端进行插入和删除，但另一端只允许插入的双端队列。
+
+输入受限的双端队列：允许一端进行插入和删除，但另一端只允许删除的双端队列。
+
+- 输入受限的两端队列，假设end1端输入1,2,3,4那么
 
 
 
