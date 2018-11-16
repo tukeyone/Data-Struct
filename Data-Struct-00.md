@@ -608,6 +608,7 @@ void PreOrder(Bitree T){
 
 
 例子：
+```
      └─①
 	├─②
 	│ ├─〇
@@ -619,6 +620,7 @@ void PreOrder(Bitree T){
 	└─③
 	  ├─〇
 	  └─⑤	  
+```
 PreOrder:1-2-4-6-3-5	  
 	  
 2. 中序遍历（PreOrder）
