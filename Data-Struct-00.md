@@ -1,3 +1,5 @@
+<font style="color:#0099FF;font-size:100px">Data-Struct</font>
+
 - C语言的数组相当于Python的什么?
 
 
@@ -690,6 +692,13 @@ void PostOrder(Bitree T){
 ```
 InOrder:6-4-2-3-5-1
 
+4. 递归算法和非递归算法的转换
+
+5. 层次遍历
+
+6. 由遍历序列构造二叉树
+
+## 线索二叉树
 
 
 
