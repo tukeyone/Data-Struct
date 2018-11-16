@@ -635,6 +635,7 @@ void InOrder(Bitree T){
 }
 ```
 例子：
+```
      └─①
 	├─②
 	│ ├─〇
@@ -646,6 +647,7 @@ void InOrder(Bitree T){
 	└─③
 	  ├─〇
 	  └─⑤	  
+```
 InOrder:2-6-4-1-3-5
 	  
 3. 后序遍历（PreOrder）
@@ -660,6 +662,7 @@ void PostOrder(Bitree T){
 }
 ```
 例子：
+```
      └─①
 	├─②
 	│ ├─〇
@@ -671,6 +674,7 @@ void PostOrder(Bitree T){
 	└─③
 	  ├─〇
 	  └─⑤	  
+```
 InOrder:6-4-2-3-5-1
 
 
